@@ -1,0 +1,40 @@
+<%- include('bootheader') -%>
+<%- include('menubar') -%>
+    <div class="jumbotron">
+        <h1>Recipe</h1>
+        <p>Make food</p>
+    </div>
+<!-- POST RECIPE -->
+    <form method="post" action="/processRecipe">
+          Name: <input type="text" name="name">  <br>
+          Ingredient: <input type="text" name="ingredient">  <br>
+          Description: <input type="text" name="description">  <br>
+          <input type="submit" value="submit" class="btn btn-primary">  <br>
+        </form>
+
+
+    <hr>
+    <form method="post" action="/recipeDelete">
+        <input type="submit" value="delete marked">
+        <ol>
+        <% for(i = 0; i<recipe.length; i++){  %>
+            <li>
+                  <i>user: <%= recipe[i].userName %></i><br>
+                  <b> Name: <%= recipe[i].name %> </b><br>
+                  <b> ingredient: <%= recipe[i].ingredient %> </b> <br>
+                  <b> description: <%= recipe[i].description %> </b> </i>
+                  <br>Created At: <%= recipe[i].createdAt %>
+
+                  <br>Delete Mark
+                  <% if (recipe[i].userId.equals(user._id)) { %>
+                      <input type="checkbox" name="delete" value="<%= recipe[i]._id %>">
+                  <% } %>
+
+             </li>
+
+        <% } %>
+        </ol>
+
+    </form>
+
+<%- include('bootfooter') -%>
